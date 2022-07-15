@@ -1,0 +1,150 @@
+
+<h1>List of Users</h1>
+<button (click)="loadData()" [hidden]="IsLoading">
+  load data
+
+    </button>
+    <button [hidden]="!IsLoading" (click)="getUserList()">Refresh Data</button>
+<div *ngIf="IsLoading" class="row">
+<table>
+    <thead>
+
+      
+            <th>
+                FirstName
+            </th>
+            <th>
+                MiddleName
+            </th>
+            <th>
+                LastName
+            </th>
+
+            <th>
+                EmailId
+            </th>
+            <th>
+                phoneNumber
+            </th>
+            <th>
+                role
+            </th>
+            <th>
+                address
+            </th>
+            <th>
+                createdOn
+            </th>
+            <th>
+                modifiedOn
+            </th>
+
+             
+</thead>
+<tbody>
+    <tr *ngFor ="let user of userList">
+        <td>
+            <div *ngIf="!Edit">
+                {{user.FirstName}}
+            </div>
+            <div *ngIf="Edit">
+                <input type="text" name="firstname" >
+             
+               
+            </div>
+            
+        </td>
+        <td>
+            <div *ngIf="!Edit">
+                {{user.MiddleName}}
+            </div>
+            <div *ngIf="Edit">
+                <input type="text" name="firstname" placeholder="{{user.MiddleName}}"/>
+            </div>
+           
+        </td>
+        <td>
+           <div *ngIf="!Edit">
+            {{user.LastName}}
+           </div>
+           <div *ngIf="Edit">
+            <input type="text" name="firstname" placeholder="{{user.LastName}}"/>
+        </div>
+            
+        </td>
+
+        <td>
+            <div *ngIf="!Edit">
+                {{user.email}}
+            </div>
+            <div *ngIf="Edit">
+                <input type="text" name="firstname" placeholder="{{user.email}}"/>
+            </div>
+
+        </td>
+        <td>
+            <div *ngIf="!Edit">
+                
+                {{user.phoneNumber}}
+            </div>
+            <div *ngIf="Edit">
+                <input type="text" name="firstname" placeholder="{{user.phoneNumber}}"/>
+            </div>
+
+          
+        </td> 
+        <td>
+            <div *ngIf="!Edit">
+                {{user.role}}
+            </div>
+            <div *ngIf="Edit">
+                <input type="text" name="firstname" placeholder="{{user.role}}"/>
+            </div>
+          
+        </td> 
+        <td>
+            <div *ngIf="!Edit">
+                {{user.address}}
+            </div>
+            <div *ngIf="Edit">
+                
+                <input type="text" name="firstname" placeholder="{{user.address}}"/>
+            </div>
+        </td> 
+        <td>
+        
+                {{user.createdOn}}
+
+        </td>
+        <td>
+       
+                {{user.modifiedOn}}
+
+        
+          
+        </td>
+        <td>
+            <div *ngIf="!Edit">
+                <button (click)="onEdit()">Edit</button>
+            </div>
+            <div *ngIf="Edit">
+                <button (click)="onSave()">Save</button>
+            </div>
+
+            
+        </td>       
+        <td>
+            <div *ngIf="!Edit">
+            <button (click)="deleteUser(user.userId)">Delete</button>
+        </div>
+        <div *ngIf="Edit">
+            <button (click)="onCancel()">Cancel</button>
+        </div>
+           
+        </td>
+       
+    </tr>
+</tbody>
+ 
+</table>
+</div>
