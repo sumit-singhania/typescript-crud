@@ -25,6 +25,7 @@ export class EditDeleteUserService {
         item.address = userDetail.address; 
         item.createdOn = userDetail.createdOn; 
         item.modifiedOn = userDetail.modifiedOn;
+        item.isEdit=false;
       }
     }
     return userList;

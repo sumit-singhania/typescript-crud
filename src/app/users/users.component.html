@@ -6,6 +6,7 @@
     </button>
     <button [hidden]="!IsLoading" (click)="getUserList()">Refresh Data</button>
 <div *ngIf="IsLoading" class="row">
+    <div class="col-12">
 <table>
     <thead>
 
@@ -44,101 +45,94 @@
 <tbody>
     <tr *ngFor ="let user of userList">
         <td>
-            <div *ngIf="!Edit">
+            <div *ngIf="!user.isEdit">
                 {{user.FirstName}}
             </div>
-            <div *ngIf="Edit">
-                <input type="text" name="firstname" >
+            <div *ngIf="user.isEdit">
+                <input type="text" [(ngModel)]="user.FirstName" class="form-control"/>
              
-               
             </div>
             
         </td>
         <td>
-            <div *ngIf="!Edit">
+            <div *ngIf="!user.isEdit">
                 {{user.MiddleName}}
             </div>
-            <div *ngIf="Edit">
-                <input type="text" name="firstname" placeholder="{{user.MiddleName}}"/>
+            <div *ngIf="user.isEdit">
+                <input type="text" [(ngModel)]="user.MiddleName" class="form-control"/>
             </div>
            
         </td>
         <td>
-           <div *ngIf="!Edit">
+           <div *ngIf="!user.isEdit">
             {{user.LastName}}
            </div>
-           <div *ngIf="Edit">
-            <input type="text" name="firstname" placeholder="{{user.LastName}}"/>
+           <div *ngIf="user.isEdit">
+            <input type="text" [(ngModel)]="user.LastName" class="form-control"/>
         </div>
             
         </td>
 
         <td>
-            <div *ngIf="!Edit">
+            <div *ngIf="!user.isEdit">
                 {{user.email}}
             </div>
-            <div *ngIf="Edit">
-                <input type="text" name="firstname" placeholder="{{user.email}}"/>
+            <div *ngIf="user.isEdit">
+                <input type="text" [(ngModel)]="user.email" class="form-control"/>
             </div>
 
         </td>
         <td>
-            <div *ngIf="!Edit">
+            <div *ngIf="!user.isEdit">
                 
                 {{user.phoneNumber}}
             </div>
-            <div *ngIf="Edit">
-                <input type="text" name="firstname" placeholder="{{user.phoneNumber}}"/>
+            <div *ngIf="user.isEdit">
+                input type="text" [(ngModel)]="user.phoneNumber" class="form-control"/>
             </div>
 
           
         </td> 
         <td>
-            <div *ngIf="!Edit">
+            <div *ngIf="!user.isEdit">
                 {{user.role}}
             </div>
-            <div *ngIf="Edit">
-                <input type="text" name="firstname" placeholder="{{user.role}}"/>
+            <div *ngIf="user.isEdit">
+                input type="text" [(ngModel)]="user.role" class="form-control"/>
             </div>
           
         </td> 
         <td>
-            <div *ngIf="!Edit">
+            <div *ngIf="!user.isEdit">
                 {{user.address}}
             </div>
-            <div *ngIf="Edit">
+            <div *ngIf="user.isEdit">
                 
-                <input type="text" name="firstname" placeholder="{{user.address}}"/>
+                input type="text" [(ngModel)]="user.address" class="form-control"/>
             </div>
         </td> 
         <td>
-        
-                {{user.createdOn}}
-
+            {{user.createdOn}}
         </td>
         <td>
-       
-                {{user.modifiedOn}}
-
-        
-          
+            {{user.modifiedOn}}
         </td>
         <td>
-            <div *ngIf="!Edit">
-                <button (click)="onEdit()">Edit</button>
+            <div *ngIf="!user.isEdit">
+                <button (click)="onEdit(user)">Edit</button>
             </div>
-            <div *ngIf="Edit">
-                <button (click)="onSave()">Save</button>
+            <div *ngIf="user.isEdit">
+                <button (click)="onSave(user)">Save</button>
             </div>
 
             
         </td>       
         <td>
-            <div *ngIf="!Edit">
+            <div *ngIf="!user.isEdit">
             <button (click)="deleteUser(user.userId)">Delete</button>
         </div>
-        <div *ngIf="Edit">
-            <button (click)="onCancel()">Cancel</button>
+        <div *ngIf="user.isEdit">
+            <button (click)="onCancel(user)">Cancel</button>
         </div>
            
         </td>
@@ -147,4 +141,5 @@
 </tbody>
  
 </table>
+</div>
 </div>

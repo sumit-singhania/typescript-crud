@@ -22,7 +22,8 @@ export class UserListService {
       role: 'user', 
       address: 'na', 
       createdOn: '20/02/2020', 
-      modifiedOn: '20/02/2020'
+      modifiedOn: '20/02/2020',
+      isEdit: false
       },
       {
       userId: '2',
@@ -34,7 +35,8 @@ export class UserListService {
       role: 'user', 
       address: 'na', 
       createdOn: '20/02/2020', 
-      modifiedOn: '20/02/2020'
+      modifiedOn: '20/02/2020',
+      isEdit: false
       }];
     return userList;
   }
