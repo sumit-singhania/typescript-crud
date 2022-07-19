@@ -9,7 +9,7 @@ export class UserListService {
 
   constructor() { }
 /**
- * 
+ * To return static data for user list
  */
   getUserListDetail(): UserList[]{
     const userList: UserList[]= [
@@ -20,7 +20,7 @@ export class UserListService {
       LastName: 'Singhania', 
       email: 'sumitsinghania68@gmail.com', 
       phoneNumber: 7508799790, 
-      role: UserRoleEnums.subscriber, 
+      role: UserRoleEnums.subscriber, // use if enum 
       address: 'na', 
       createdOn: '20/02/2020', 
       modifiedOn: '20/02/2020',

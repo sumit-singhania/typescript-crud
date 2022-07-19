@@ -13,7 +13,7 @@ export class EditDeleteUserService {
    * @param userList 
    * @param userDetail 
    */
-  editUserList(userList: any, userDetail:any){
+  editUserList(userList: Array<UserList>, userDetail:UserList): Array<UserList>{
     for (let item of userList ) {
       if (item.userId === userDetail.userId){
         item.FirstName = userDetail.FirstName;
@@ -36,7 +36,7 @@ export class EditDeleteUserService {
  * @param userList 
  * @param id 
  */
-  deleteUserById(userList:any, id: string){
+  deleteUserById(userList:Array<UserList>, id: string): Array<UserList>{
     userList = userList.filter( (item : any ) => {
       if(id!== item.userId){
         return item;
@@ -44,4 +44,5 @@ export class EditDeleteUserService {
     });
     return userList;
   }
+  
 }
