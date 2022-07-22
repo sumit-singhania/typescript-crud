@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { UserList } from '../model/user-list';
 import { UserRoleEnums } from '../model/user-role-enums';
 
@@ -7,38 +9,12 @@ import { UserRoleEnums } from '../model/user-role-enums';
 })
 export class UserListService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 /**
  * To return static data for user list
  */
-  getUserListDetail(): UserList[]{
-    const userList: UserList[]= [
-      {
-      userId: '1',
-      FirstName: 'Sumit',
-      MiddleName:'na',
-      LastName: 'Singhania', 
-      email: 'sumitsinghania68@gmail.com', 
-      phoneNumber: 7508799790, 
-      role: UserRoleEnums.subscriber, // use if enum 
-      address: 'na', 
-      createdOn: '20/02/2020', 
-      modifiedOn: '20/02/2020',
-      isEdit: false
-      },
-      {
-      userId: '2',
-      FirstName: 'Sumit',
-      MiddleName:'na',
-      LastName: 'Singhania', 
-      email: 'sumitsinghania68@gmail.com', 
-      phoneNumber: 7508799790, 
-      role: UserRoleEnums.admin, 
-      address: 'na', 
-      createdOn: '20/02/2020', 
-      modifiedOn: '20/02/2020',
-      isEdit: false
-      }];
-    return userList;
+  getUserListDetail(): Observable<UserList[]>{
+    const userlist =this.httpClient.get<UserList[]>('http://localhost:3000/user-lists');
+    return userlist;
   }
 }

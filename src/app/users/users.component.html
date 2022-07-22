@@ -46,29 +46,29 @@
     <tr *ngFor ="let user of userList">
         <td>
             <div *ngIf="!user.isEdit">
-                {{user.FirstName}}
+                {{user.firstName}}
             </div>
             <div *ngIf="user.isEdit">
-                <input type="text" [(ngModel)]="user.FirstName" class="form-control"/>
+                <input type="text" [(ngModel)]="user.firstName" class="form-control"/>
              
             </div>
             
         </td>
         <td>
             <div *ngIf="!user.isEdit">
-                {{user.MiddleName}}
+                {{user.middleName}}
             </div>
             <div *ngIf="user.isEdit">
-                <input type="text" [(ngModel)]="user.MiddleName" class="form-control"/>
+                <input type="text" [(ngModel)]="user.middleName" class="form-control"/>
             </div>
            
         </td>
         <td>
            <div *ngIf="!user.isEdit">
-            {{user.LastName}}
+            {{user.lastName}}
            </div>
            <div *ngIf="user.isEdit">
-            <input type="text" [(ngModel)]="user.LastName" class="form-control"/>
+            <input type="text" [(ngModel)]="user.lastName" class="form-control"/>
         </div>
             
         </td>
@@ -138,6 +138,88 @@
         </td>
        
     </tr>
+    <div *ngIf="!createItem">
+        <button (click)="saveNewEntery()">Create</button>
+    </div>
+     <!--<div *ngIf="createItem">
+        <tr>
+            <td>
+
+                <div *ngIf="createItem">
+                    <input type="text" [(ngModel)]="firstName" class="form-control"/>
+                 
+                </div>
+                
+            </td>
+            <td>
+
+                <div *ngIf="createItem">
+                    <input type="text" [(ngModel)]="middleName" class="form-control"/>
+                </div>
+               
+            </td>
+            <td>
+    
+               <div *ngIf="createItem">
+                <input type="text" [(ngModel)]="lastName" class="form-control"/>
+            </div>
+                
+            </td>
+    
+            <td>
+          
+                <div *ngIf="createItem">
+                    <input type="text" [(ngModel)]="email" class="form-control"/>
+                </div>
+    
+            </td>
+            <td>
+          
+                <div *ngIf="createItem">
+                    <input type="text" [(ngModel)]="phoneNumber" class="form-control"/>
+                </div>
+    
+              
+            </td> 
+            <td>
+           
+                <div *ngIf="createItem">
+                    <input type="text" [(ngModel)]="role" class="form-control"/>
+                </div>
+              
+            </td> 
+            <td>
+               
+                <div *ngIf="createItem">
+                    
+                    <input type="text" [(ngModel)]="address" class="form-control"/>
+                </div>
+            </td> 
+            <td>
+                createdOn
+            </td>
+            <td>
+                modifiedOn
+            </td>
+            <td>
+                
+                <div *ngIf="createItem">
+                    <button (click)="disableCreateItem">Save</button>
+                </div>
+    
+                
+            </td>       
+            <td>
+         
+            <div *ngIf="createItem">
+                <button (click)="onCancel(user)">Cancel</button>
+            </div>
+               
+            </td>
+           
+        </tr>
+        <button (click)="saveNewEntery()">Create</button>
+    </div> -->
 </tbody>
  
 </table>

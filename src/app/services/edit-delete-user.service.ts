@@ -1,34 +1,44 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
+import { Observable } from 'rxjs';
 import { UserList } from '../model/user-list';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class EditDeleteUserService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+
 
   /**
    * To update user
    * @param userList 
    * @param userDetail 
    */
-  editUserList(userList: Array<UserList>, userDetail:UserList): Array<UserList>{
-    for (let item of userList ) {
-      if (item.userId === userDetail.userId){
-        item.FirstName = userDetail.FirstName;
-        item.MiddleName = userDetail.MiddleName ? userDetail.MiddleName: '',
-        item.LastName = userDetail.LastName; 
-        item.email = userDetail.email; 
-        item.phoneNumber = userDetail.phoneNumber; 
-        item.role = userDetail.role; 
-        item.address = userDetail.address; 
-        item.createdOn = userDetail.createdOn; 
-        item.modifiedOn = userDetail.modifiedOn;
-        item.isEdit=false;
+    editUserList(userList: Array<UserList>, userDetail: UserList, edit?: boolean): Observable<UserList>{
+      const data  = {
+        firstName: userDetail.firstName,
+        middleName: userDetail.middleName?  userDetail.middleName: '',
+        lastName: userDetail.lastName, 
+        email: userDetail.email, 
+        phoneNumber: userDetail.phoneNumber, 
+        role: userDetail.role, 
+        address: userDetail.address, 
+        createdOn: moment().format('YYYY-MM-DD HH:mm:ss'), 
+        modifiedOn: moment().format('YYYY-MM-DD HH:mm:ss'),
+        isEdit: false,
       }
-    }
-    return userList;
+      if (!userDetail.oldEntery) {
+
+        return this.httpClient.post<UserList>('http://localhost:3000/user-lists',data);
+
+      }
+       
+      return this.httpClient.put<UserList>(`http://localhost:3000/user-lists/${userDetail.userId}`,data);
   }
 
 /**
@@ -44,5 +54,18 @@ export class EditDeleteUserService {
     });
     return userList;
   }
+
+
   
+}
+
+function DateTransform() {
+  return function (target: any, key: string) {
+    Object.defineProperty(target, key, { 
+      configurable: false,
+      get: () => {
+        return moment(key.replace('T', ' '), 'YYYY-MM-DD HH:mm:ss').toDate() 
+      }
+    });
+  }
 }

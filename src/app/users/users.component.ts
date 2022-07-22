@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { UserList } from '../model/user-list';
 import { EditDeleteUserService } from '../services/edit-delete-user.service';
 import { UserListService } from '../services/user-list.service';
@@ -9,9 +10,9 @@ import { UserListService } from '../services/user-list.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  Edit=false;
+  createItem=false;
   userList: UserList[]=[];
- 
+  updatedDate='';
   constructor(private userListService: UserListService, private editDeleteUserService: EditDeleteUserService) { }
   IsLoading = false;
   /**
@@ -42,7 +43,9 @@ export class UsersComponent implements OnInit {
    */
   getUserList(): void{
     /** CALL SERVICE METHOD TO GET LIST OF USER */
-    this.userList = this.userListService.getUserListDetail();
+    this.userListService.getUserListDetail().subscribe(data=>{
+      this.userList = data;
+    });
   }
   /**
    * To edit and save data
@@ -50,7 +53,10 @@ export class UsersComponent implements OnInit {
    */
    onSave(userDetail: any){
     /** CALL SERVICE METHOD TO SAVE UPDATED DATA */
-    this.userList = this.editDeleteUserService.editUserList(this.userList, userDetail);
+    let resultantData;
+    this.editDeleteUserService.editUserList(this.userList, userDetail).subscribe(data=> {resultantData= data});
+this.getUserList();
+   
   }
   /**
    * Delete user by id
@@ -59,5 +65,34 @@ export class UsersComponent implements OnInit {
   deleteUser(id: string): void{
     /** CALL SERVICE METHOD TO DELETE USER BY ID */
     this.userList = this.editDeleteUserService.deleteUserById(this.userList, id);
+  }
+
+  /**
+   * 
+   */
+  enableCreateItem(){
+    this.createItem = true;
+  }
+
+  disableCreateItem(){
+    this.createItem = false;
+  }
+  saveNewEntery(){
+    const date= moment().format('YYYY-MM-DD HH:mm:ss');
+    const newEntery: UserList ={
+    userId:  `${this.userList.length +1}`,
+    firstName : 'firstName',
+    middleName : '',
+    lastName : 'lastName',
+    email : 'email',
+    phoneNumber : 0,
+    role : 'role',
+    address : '',
+    createdOn : '',
+    modifiedOn: date,
+    isEdit:true,
+    oldEntery: false
+  }
+   this.userList.push(newEntery);
   }
 }
