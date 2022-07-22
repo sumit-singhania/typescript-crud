@@ -64,7 +64,8 @@ this.getUserList();
    */
   deleteUser(id: string): void{
     /** CALL SERVICE METHOD TO DELETE USER BY ID */
-    this.userList = this.editDeleteUserService.deleteUserById(this.userList, id);
+    this.editDeleteUserService.deleteUserById( id).subscribe();
+    this.getUserList();
   }
 
   /**
@@ -79,7 +80,7 @@ this.getUserList();
   }
   saveNewEntery(){
     const date= moment().format('YYYY-MM-DD HH:mm:ss');
-    const newEntery: UserList ={
+    const newUserEntery: UserList ={
     userId:  `${this.userList.length +1}`,
     firstName : 'firstName',
     middleName : '',
@@ -91,8 +92,8 @@ this.getUserList();
     createdOn : '',
     modifiedOn: date,
     isEdit:true,
-    oldEntery: false
+    newEntery: true
   }
-   this.userList.push(newEntery);
+   this.userList.push(newUserEntery);
   }
 }

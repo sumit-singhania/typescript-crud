@@ -14,5 +14,5 @@
       createdOn: string, 
       modifiedOn: string,
       isEdit: boolean,
-      oldEntery?: boolean
+      newEntery?: boolean
   }

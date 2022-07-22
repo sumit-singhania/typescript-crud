@@ -32,7 +32,7 @@ export class EditDeleteUserService {
         modifiedOn: moment().format('YYYY-MM-DD HH:mm:ss'),
         isEdit: false,
       }
-      if (!userDetail.oldEntery) {
+      if (userDetail.newEntery) {
 
         return this.httpClient.post<UserList>('http://localhost:3000/user-lists',data);
 
@@ -46,13 +46,8 @@ export class EditDeleteUserService {
  * @param userList 
  * @param id 
  */
-  deleteUserById(userList:Array<UserList>, id: string): Array<UserList>{
-    userList = userList.filter( (item : any ) => {
-      if(id!== item.userId){
-        return item;
-      }
-    });
-    return userList;
+  deleteUserById(id: string): Observable<UserList>{
+    return this.httpClient.delete<UserList>(`http://localhost:3000/user-lists/${id}`);
   }
 
 
